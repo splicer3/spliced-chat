@@ -49,6 +49,8 @@ const Input: React.FC<InputProps> = ({
                         dark:text-gray-100
                         dark:bg-slate-900
                         shadow-sm
+                        hover:shadow-[rgba(0,_0,_0,_0.4)_0px_2px_7px]
+                        dark:hover:shadow-[rgba(255,_255,_255,_0.4)_0px_6px_21px]
                         ring-1
                         ring-inset
                         ring-gray-300

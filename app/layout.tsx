@@ -2,6 +2,7 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 
 import { Providers } from '@/providers/ThemeProvider'
+import ToasterContext from './context/ToasterContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,6 +20,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <Providers>
+          <ToasterContext />
           {children}
         </Providers>
       </body>
