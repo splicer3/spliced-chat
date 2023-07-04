@@ -2,27 +2,20 @@
 
 import useConversation from "@/app/hooks/useConversation";
 import axios from "axios";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { FieldValues, FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { HiPaperAirplane, HiPhoto } from "react-icons/hi2";
 import MessageInput from "./MessageInput";
 import { CldUploadButton } from "next-cloudinary";
 
 const Form = () => {
     const { conversationId } = useConversation();
-    const {
-        register, 
-        handleSubmit,
-        setValue,
-        formState: {
-            errors
-    }} = useForm<FieldValues>({
+    const methods = useForm<FieldValues>({
         defaultValues: {
             message: ''
         }
     });
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        setValue('message', '', { shouldValidate: true });
         axios.post('/api/messages', {
             ...data,
             conversationId
@@ -67,38 +60,36 @@ const Form = () => {
                 "
             />
             </CldUploadButton>
-            <form
-                method="post"
-                id="messageForm"
-                onSubmit={handleSubmit(onSubmit)}
-                className="flex items-center gap-2 lg:gap-4 w-full"
-            >
-                <MessageInput
-                    id="message"
-                    register={register}
-                    errors={errors}
-                    required
-                    placeholder="Type here..."
-                />
-                <button
-                    type="submit"
-                    className="
-                        rounded-full
-                        p-2
-                        bg-teal-500
-                        dark:bg-amber-500
-                        hover:bg-teal-600
-                        dark:hover:bg-amber-600
-                        cursor-pointer
-                        transition
-                    "
+            <FormProvider {...methods}>
+                <form
+                    onSubmit={methods.handleSubmit(onSubmit)}
+                    className="flex items-center gap-2 lg:gap-4 w-full"
                 >
-                    <HiPaperAirplane
-                        size={18}
-                        className="text-white dark:text-black"
+                    <MessageInput
+                        id="message"
+                        required
+                        placeholder="Type here..."
                     />
-                </button>
-            </form>
+                    <button
+                        type="submit"
+                        className="
+                            rounded-full
+                            p-2
+                            bg-teal-500
+                            dark:bg-amber-500
+                            hover:bg-teal-600
+                            dark:hover:bg-amber-600
+                            cursor-pointer
+                            transition
+                        "
+                    >
+                        <HiPaperAirplane
+                            size={18}
+                            className="text-white dark:text-black"
+                        />
+                    </button>
+                </form>
+            </FormProvider>
         </div>
     );
 }

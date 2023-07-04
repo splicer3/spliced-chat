@@ -1,31 +1,28 @@
 'use client'
 
 import { useEffect, useRef, useState } from "react";
-import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
+import { FieldErrors, FieldValues, UseFormRegister, useFormContext } from "react-hook-form";
 
 interface MessageInputProps {
     placeholder?: string;
     id: string;
-    type?: string;
     required?: boolean;
-    register: UseFormRegister<FieldValues>;
-    errors: FieldErrors
 }
 
 const MessageInput: React.FC<MessageInputProps> = ({
     placeholder,
     id,
-    type,
     required,
-    register,
-    errors
 }) => {
-    const TextAreaRef = useRef<HTMLTextAreaElement>(null);
+    const TextAreaRef = useRef<HTMLTextAreaElement | null>();
     const [value, setValue] = useState("");
+    const { register, formState: { errors }} = useFormContext();
+    const { ref, ...rest } = register('message');
 
     const handleChange = (evt: React.ChangeEvent<HTMLTextAreaElement>) => {
         const val = evt.target?.value;
         setValue(val);
+        console.log(val)
     };
 
     useEffect(() => {
@@ -36,20 +33,23 @@ const MessageInput: React.FC<MessageInputProps> = ({
 
             TextAreaRef.current!.style.height = scrollHeight + "px";
           }
-    }, [TextAreaRef, value])
+    }, [TextAreaRef, value]);
 
     return (
         <div className="relative w-full flex items-center">
             <textarea
                 id={id}
-                form="messageForm"
                 autoComplete={id}
-                {...register("message")}
+                {...rest}
+                name="message"
+                ref={(e) => {
+                    ref(e)
+                    TextAreaRef.current = e
+                }}
                 placeholder={placeholder}
                 rows={1}
-                ref={TextAreaRef}
                 onChange={handleChange}
-                value={value}
+                required={required}
                 className="
                     text-black
                     dark:text-gray-100
