@@ -41,13 +41,14 @@ const Input: React.FC<InputProps> = ({
                     className={
                     clsx(`
                         form-input
-                        block w-full
+                        block
+                        w-full
                         rounded-md
                         border-0
                         py-1.5
                         text-gray-900
                         dark:text-gray-100
-                        dark:bg-slate-900
+                        dark:bg-stone-800
                         shadow-sm
                         hover:shadow-[rgba(0,_0,_0,_0.4)_0px_2px_7px]
                         dark:hover:shadow-[rgba(255,_255,_255,_0.4)_0px_6px_21px]

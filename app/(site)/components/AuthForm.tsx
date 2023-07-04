@@ -101,7 +101,7 @@ const AuthForm = () => {
             <div
                 className="
                     bg-white
-                    dark:bg-slate-900
+                    dark:bg-stone-900
                     px-4
                     py-8
                     shadow-lg
@@ -156,7 +156,7 @@ const AuthForm = () => {
                             <div className="w-full border-t border-gray-300"/> {/* Line underneath button */}
                         </div>
                         <div className="relative flex justify-center text-sm">
-                            <span className="bg-white dark:bg-slate-900 px-2 text-gray-500 dark:text-gray-100">
+                            <span className="bg-white dark:bg-stone-900 px-2 text-gray-500 dark:text-gray-100">
                                 Or continue with
                             </span>
                         </div>

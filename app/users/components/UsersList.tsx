@@ -23,7 +23,7 @@ const UsersList: React.FC<UsersListProps> = ({
                 overflow-y-auto
                 border-r
                 border-gray-200
-                dark:border-gray-900
+                dark:border-stone-900
                 block
                 w-full
                 left-0

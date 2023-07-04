@@ -57,7 +57,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
                     py-2
                     px-4
                     bg-neutral-100
-                    dark:bg-slate-950
+                    dark:bg-stone-800
                     w-full
                     rounded-r-lg
                     rounded-l-lg

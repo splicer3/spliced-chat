@@ -33,7 +33,7 @@ const ConversationsList: React.FC<ConversationsListProps> = ({
                     overflow-y-auto
                     border-r
                     border-gray-200
-                    dark:border-gray-900
+                    dark:border-stone-900
                 `,
                     isOpen ? 'hidden' : 'block left-0 w-full'
                 )}
