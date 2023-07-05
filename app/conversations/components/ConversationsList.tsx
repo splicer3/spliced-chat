@@ -62,16 +62,16 @@ const ConversationsList: React.FC<ConversationsListProps> = ({
                     return {
                         ...currentConversation,
                         messages: conversation.messages
-                    }
+                    };
                 }
                 
                 return currentConversation;
-            }))
+            }));
         };
 
         const removeHandler = (conversation: FullConversation) => {
             setConversations((current) => {
-                return [...current.filter((currentConversation) => currentConversation.id != conversation.id)]
+                return [...current.filter((currentConversation) => currentConversation.id !== conversation.id)]
             });
 
             if (conversationId === conversation.id) {

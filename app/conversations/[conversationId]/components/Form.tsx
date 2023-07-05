@@ -24,7 +24,6 @@ const Form = () => {
     }, [watchMessage])
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        console.log(methods.getValues());
         methods.setValue('message', '', { shouldValidate: true });
         axios.post('/api/messages', {
             ...data,

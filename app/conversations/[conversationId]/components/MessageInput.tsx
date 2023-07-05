@@ -22,7 +22,6 @@ const MessageInput: React.FC<MessageInputProps> = ({
     const handleChange = (evt: React.ChangeEvent<HTMLTextAreaElement>) => {
         const val = evt.target?.value;
         setValue(val);
-        console.log(val)
     };
 
     useEffect(() => {
