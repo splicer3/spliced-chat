@@ -8,6 +8,7 @@ import {IoClose, IoTrash} from "react-icons/io5"
 import { Fragment, useMemo, useState } from "react";
 import Avatar from "@/app/components/Avatar";
 import DeleteModal from "./DeleteModal";
+import GroupAvatar from "@/app/components/GroupAvatar";
 
 interface ProfileDrawerProps {
     isOpen: boolean;
@@ -29,6 +30,10 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
     const joinedDate = useMemo(() => {
         return format(new Date(otherUser.createdAt), 'PP');
     }, [otherUser.createdAt]);
+
+    const groupDate = useMemo(() => {
+        return format(new Date(conversation.createdAt), 'PP');
+    }, [conversation.createdAt])
 
     const title = useMemo(() => {
         return conversation.name || otherUser.name
@@ -118,7 +123,11 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                                             <div className="relative mt-6 flex-1 px-4 sm:px-6">
                                                 <div className="flex flex-col items-center">
                                                     <div className="mb-2">
+                                                    {conversation.isGroup ? (
+                                                        <GroupAvatar users={conversation.users}/>
+                                                    ): (
                                                         <Avatar user={otherUser}/>
+                                                    )}
                                                     </div>
                                                     <div>
                                                         {title}
@@ -179,17 +188,18 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                                                                 sm:px-6
                                                             "
                                                         >
-                                                            {!conversation.isGroup && (
+                                                            {conversation.isGroup ? (
                                                                 <div>
                                                                     <dt
                                                                         className="
                                                                             text-sm
                                                                             font-medium
                                                                             text-gray-500
-                                                                            dark:text-gray-300
+                                                                            sm:w-40
+                                                                            sm:flex-shrink-0
                                                                         "
                                                                     >
-                                                                        Email
+                                                                        Emails
                                                                     </dt>
                                                                     <dd
                                                                         className="
@@ -200,11 +210,34 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                                                                             sm:col-span-2
                                                                         "
                                                                     >
-                                                                        {otherUser.email}
+                                                                        {conversation.users.map((user) => user.email).join(', ')}
                                                                     </dd>
                                                                 </div>
+                                                            ) : (
+                                                                <div>
+                                                                <dt
+                                                                    className="
+                                                                        text-sm
+                                                                        font-medium
+                                                                        text-gray-500
+                                                                        dark:text-gray-300
+                                                                    "
+                                                                >
+                                                                    Email
+                                                                </dt>
+                                                                <dd
+                                                                    className="
+                                                                        mt-1
+                                                                        text-sm
+                                                                        text-gray-900
+                                                                        dark:text-gray-100
+                                                                        sm:col-span-2
+                                                                    "
+                                                                >
+                                                                    {otherUser.email}
+                                                                </dd>
+                                                            </div>
                                                             )}
-                                                            {!conversation.isGroup && (
                                                                 <>
                                                                     <hr/>
                                                                     <div>
@@ -218,7 +251,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                                                                                 sm:flex-shrink-0
                                                                             "
                                                                         >
-                                                                            Joined
+                                                                            {conversation.isGroup ? 'Created' : 'Joined'}
                                                                         </dt>
                                                                         <dd
                                                                             className="
@@ -229,13 +262,12 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                                                                                 sm:col-span-2
                                                                             "
                                                                         >
-                                                                            <time dateTime={joinedDate}>
-                                                                                {joinedDate}
+                                                                            <time dateTime={conversation.isGroup ? groupDate : joinedDate}>
+                                                                                {conversation.isGroup ? groupDate : joinedDate}
                                                                             </time>
                                                                         </dd>
                                                                     </div>
                                                                 </>
-                                                            )}
                                                         </dl>
                                                     </div>
                                                 </div>

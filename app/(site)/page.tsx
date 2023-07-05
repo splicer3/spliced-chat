@@ -29,7 +29,7 @@ export default function Home() {
                     dark:text-white
                 "
             >
-                Sign in to your account
+                Welcome to Spliced
             </h2>
         </div>
         <AuthForm />

@@ -3,7 +3,7 @@
 import { User } from "@prisma/client";
 
 import Image from "next/image";
-import Placeholder from "@/public/images/placeholder.jpg"
+import Placeholder from "@/public/images/placeholder.jpg";
 
 interface AvatarProps {
     user?: User;
@@ -32,7 +32,7 @@ const Avatar: React.FC<AvatarProps> = ({
                     fill
                 />
             </div>
-        <span className="absolute block rounded-full bg-teal-500 dark:bg-amber-500 ring-2 ring-white dark:ring-slate-950 top-0 right-0 h-2 md:h-3 md:w-3"/>
+        <span className="absolute block rounded-full bg-teal-500 dark:bg-amber-500 ring-2 ring-white dark:ring-stone-800 top-0 right-0 h-2 w-2 md:h-3 md:w-3"/>
         </div>
     );
 }
