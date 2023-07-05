@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from "react";
-import { FieldErrors, FieldValues, UseFormRegister, useFormContext } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 
 interface MessageInputProps {
     placeholder?: string;
@@ -42,9 +42,9 @@ const MessageInput: React.FC<MessageInputProps> = ({
                 autoComplete={id}
                 {...rest}
                 name="message"
-                ref={(e) => {
-                    ref(e)
-                    TextAreaRef.current = e
+                ref={(reference) => {
+                    ref(reference)
+                    TextAreaRef.current = reference
                 }}
                 placeholder={placeholder}
                 rows={1}

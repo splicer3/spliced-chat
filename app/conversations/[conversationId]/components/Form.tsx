@@ -6,6 +6,8 @@ import { FieldValues, FormProvider, SubmitHandler, useForm } from "react-hook-fo
 import { HiPaperAirplane, HiPhoto } from "react-icons/hi2";
 import MessageInput from "./MessageInput";
 import { CldUploadButton } from "next-cloudinary";
+import { useCallback, useEffect } from "react";
+import { watch } from "fs";
 
 const Form = () => {
     const { conversationId } = useConversation();
@@ -15,7 +17,14 @@ const Form = () => {
         }
     });
 
+    const watchMessage = methods.watch("message");
+    
+    useEffect(() => {
+        console.log(watchMessage)
+    }, [watchMessage])
+
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
+        console.log(methods.getValues());
         methods.setValue('message', '', { shouldValidate: true });
         axios.post('/api/messages', {
             ...data,
@@ -29,6 +38,7 @@ const Form = () => {
             conversationId
         })
     }
+
     return (
         <div
             className="

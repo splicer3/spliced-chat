@@ -45,7 +45,7 @@ const MessageBox: React.FC<MessageBoxProps> = ({
     const messageClasses = clsx(
         "text-sm w-fit overflow-hidden",
         isOwn ? 'bg-teal-500 dark:bg-amber-600 text-white' : 'bg-gray-100 dark:bg-stone-800 dark:text-gray-100',
-        message.image ? 'rounded-md p-0' : 'rounded-full py-2 px-3'
+        message.image ? 'rounded-md p-0 bg-transparent dark:bg-transparent' : 'rounded-xl py-2 px-3'
     )
     return (
         <div className={container}>
@@ -77,13 +77,13 @@ const MessageBox: React.FC<MessageBoxProps> = ({
                             className="
                                 object-cover
                                 cursor-pointer
-                                hover:scale-110
+                                hover:scale-90
                                 transition
                                 translate
                             "
                         />
                     ) : (
-                        <div>{message.body}</div>
+                        <div className="whitespace-pre-wrap">{message.body}</div>
                     )}
                 </div>
                 {isLast && isOwn && seenList.length > 0 && (

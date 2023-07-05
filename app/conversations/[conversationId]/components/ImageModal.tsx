@@ -19,10 +19,10 @@ const ImageModal: React.FC<ImageModalProps> = ({
     }
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
-            <div className="w-80 h-80">
+            <div className="w-96 h-96 aspect-video">
                 <Image
                     alt="Message image"
-                    className="object-cover"
+                    className="object-scale-down"
                     fill
                     src={src}
                 />

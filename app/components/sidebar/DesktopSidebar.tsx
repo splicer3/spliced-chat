@@ -9,23 +9,21 @@ import Avatar from "../Avatar";
 import SettingsModal from "./SettingsModal";
 
 interface DesktopSidebarProps {
-    currentUser: User
+    currentUser: User;
 }
 
 const DesktopSidebar: React.FC<DesktopSidebarProps> = ({
     currentUser
 }) => {
     const routes = useRoutes();
-    const [isOpen, setIsOpen] = useState(false);
-
-    console.log({ currentUser })
+    const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
     return (
         <>
             <SettingsModal
                 currentUser={currentUser}
-                isOpen={isOpen}
-                onClose={() => setIsOpen(false)}
+                isOpen={isSettingsOpen}
+                onClose={() => setIsSettingsOpen(false)}
             />
             <div
                 className="
@@ -79,7 +77,7 @@ const DesktopSidebar: React.FC<DesktopSidebarProps> = ({
                     "
                 >
                     <div
-                        onClick={() => setIsOpen(true)}
+                        onClick={() => setIsSettingsOpen(true)}
                         className="
                             cursor-pointer
                             hover:opacity-75

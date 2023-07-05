@@ -9,6 +9,7 @@ import { Fragment, useMemo, useState } from "react";
 import Avatar from "@/app/components/Avatar";
 import DeleteModal from "./DeleteModal";
 import GroupAvatar from "@/app/components/GroupAvatar";
+import useActiveList from "@/app/hooks/useActiveList";
 
 interface ProfileDrawerProps {
     isOpen: boolean;
@@ -27,6 +28,9 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
     
     const [deleteOpen, setDeleteOpen] = useState(false);
 
+    const { members } = useActiveList();
+    const isActive = members.indexOf(otherUser?.email!) != -1;
+
     const joinedDate = useMemo(() => {
         return format(new Date(otherUser.createdAt), 'PP');
     }, [otherUser.createdAt]);
@@ -44,7 +48,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
             return `${conversation.users.length} members`;
         }
 
-        return 'Active';
+        return isActive ? 'Active' : 'Offline';
     }, [conversation])
 
     return (
