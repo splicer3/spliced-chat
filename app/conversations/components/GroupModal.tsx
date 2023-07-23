@@ -51,6 +51,8 @@ const GroupModal: React.FC<GroupModalProps> = ({
         })
             .then(() => {
                 router.refresh();
+                setValue('name', '');
+                setValue('members', [])
                 onClose();
             })
             .catch(() => toast.error('Something went wrong!'))
@@ -115,7 +117,7 @@ const GroupModal: React.FC<GroupModalProps> = ({
                         </div>
                     </div>
                 </div>
-                <div className="mt-6 flex items-center gap-x-6">
+                <div className="mt-6 flex justify-end items-center gap-x-6">
                     <Button
                         disabled={isLoading}
                         onClick={onClose}
