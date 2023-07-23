@@ -51,8 +51,6 @@ export const authOptions: AuthOptions = {
             }
         })
     ],
-    // TODO REMOVE BEFORE DEPLOYMENT
-    debug: process.env.NODE_ENV === 'development',
     session: {
         strategy: "jwt",
     },

@@ -77,8 +77,6 @@ export async function POST(
         return NextResponse.json(updatedLastMessage);
 
     } catch (error: any) {
-        // TODO REMOVE BEFORE PROD
-        console.log(error, 'ERROR_MESSAGES_SEEN')
         return new NextResponse("Internal Error", { status: 500 });
     }
 }

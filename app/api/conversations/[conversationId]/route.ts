@@ -50,8 +50,6 @@ export async function DELETE(
 
         return NextResponse.json(deletedConversation);
     } catch (error: any) {
-        //TODO: REMOVE BEFORE PROD  
-        console.log(error, 'ERROR_CONVERSATION_DELETE');
         return new NextResponse("Internal Error", { status: 500 });
     }
 }

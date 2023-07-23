@@ -26,8 +26,6 @@ export async function POST(request: Request) {
         return NextResponse.json(updatedUser);
         
     } catch (error: any) {
-        //TODO: REMOVE BEFORE PROD
-        console.log(error, 'ERROR_SETTINGS');
         return new NextResponse('Internal Error', { status: 500 })
     }
 }
