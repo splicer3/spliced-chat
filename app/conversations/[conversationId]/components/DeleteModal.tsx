@@ -53,7 +53,8 @@ const DeleteModal: React.FC<DeleteModalProps> = ({
                         items-center
                         rounded-full
                         bg-red-100
-                        sm:mx-0
+                        lg:mx-0
+                        mt-4
                         sm:h-10
                         sm:w-10
                     "
@@ -84,8 +85,10 @@ const DeleteModal: React.FC<DeleteModalProps> = ({
                 className="
                     mt-5
                     sm:mt-4
-                    sm:flex
-                    sm:flex-row-reverse
+                    flex
+                    flex-row-reverse
+                    justify-center
+                    md:justify-normal
                 "
                 >
                 <Button

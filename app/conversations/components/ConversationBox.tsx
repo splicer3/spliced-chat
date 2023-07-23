@@ -1,8 +1,6 @@
 'use client'
 
 import Avatar from "@/app/components/Avatar";
-import { Conversation, Message, User } from "@prisma/client";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
 import { format } from "date-fns";
