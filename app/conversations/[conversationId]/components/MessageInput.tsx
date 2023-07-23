@@ -19,6 +19,8 @@ const MessageInput: React.FC<MessageInputProps> = ({
 }) => {
     const TextAreaRef = useRef<HTMLTextAreaElement | null>();
     const [text, setText] = useState("");
+    const isMobile = window.innerWidth <= 640;
+
     const { register, formState: { errors }, handleSubmit, setValue } = useFormContext();
     const { ref, ...rest } = register('message');
 
@@ -47,7 +49,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
         });
     }
 
-    const onEnterPress = (e: React.KeyboardEvent) => {
+    const onKeyPress = (e: React.KeyboardEvent) => {
         if(e.key === "Enter" && e.shiftKey == false) {
           e.preventDefault();
           handleSubmit(onSubmit)();
@@ -71,7 +73,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
                 placeholder={placeholder}
                 rows={1}
                 onChange={handleChange}
-                onKeyDown={onEnterPress}
+                onKeyDown={isMobile? () => {} : onKeyPress}
                 required={required}
                 className="
                     text-black
