@@ -46,6 +46,14 @@ export async function POST(
                         users: true
                     }
                 });
+
+                newConversation.users.forEach((user) => {
+                    if (user.email) {
+                        pusherServer.trigger(user.email, 'conversation:new', newConversation);
+                    }
+                });
+
+                return NextResponse.json(newConversation);
             }
 
             // findMany is used because of OR query
@@ -90,21 +98,14 @@ export async function POST(
                 }
             });
 
-            newConversation.users.forEach((user) => {
+            newConversation.users.map((user) =>  {
                 if (user.email) {
                     pusherServer.trigger(user.email, 'conversation:new', newConversation);
                 }
             });
 
-            newConversation.users.map((user) =>  {
-                if (user.email) {
-                    pusherServer.trigger(user.email, 'conversation:new', newConversation);
-                }
-            })
-
             return NextResponse.json(newConversation)
         } catch (error: any) {
             return new NextResponse('Internal Error', { status: 500 });
-            
         }
 }

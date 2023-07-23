@@ -54,6 +54,7 @@ const GroupModal: React.FC<GroupModalProps> = ({
                 onClose();
             })
             .catch(() => toast.error('Something went wrong!'))
+            .finally(() => setIsLoading(false));
     }
     return (
         <Modal
