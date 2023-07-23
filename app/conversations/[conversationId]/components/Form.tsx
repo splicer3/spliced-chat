@@ -17,12 +17,6 @@ const Form = () => {
         }
     });
 
-    const watchMessage = methods.watch("message");
-    
-    useEffect(() => {
-        console.log(watchMessage)
-    }, [watchMessage])
-
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         methods.setValue('message', '', { shouldValidate: true });
         axios.post('/api/messages', {
@@ -79,6 +73,7 @@ const Form = () => {
                         id="message"
                         required
                         placeholder="Type here..."
+                        conversationId={conversationId}
                     />
                     <button
                         type="submit"

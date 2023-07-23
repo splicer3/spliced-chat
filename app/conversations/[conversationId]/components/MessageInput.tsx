@@ -1,27 +1,30 @@
 'use client'
 
+import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import { useFormContext } from "react-hook-form";
+import { FieldValues, SubmitHandler, useFormContext } from "react-hook-form";
 
 interface MessageInputProps {
     placeholder?: string;
     id: string;
     required?: boolean;
+    conversationId: string;
 }
 
 const MessageInput: React.FC<MessageInputProps> = ({
     placeholder,
     id,
     required,
+    conversationId
 }) => {
     const TextAreaRef = useRef<HTMLTextAreaElement | null>();
-    const [value, setValue] = useState("");
-    const { register, formState: { errors }} = useFormContext();
+    const [text, setText] = useState("");
+    const { register, formState: { errors }, handleSubmit, setValue } = useFormContext();
     const { ref, ...rest } = register('message');
 
     const handleChange = (evt: React.ChangeEvent<HTMLTextAreaElement>) => {
         const val = evt.target?.value;
-        setValue(val);
+        setText(val);
     };
 
     useEffect(() => {
@@ -32,7 +35,27 @@ const MessageInput: React.FC<MessageInputProps> = ({
 
             TextAreaRef.current!.style.height = scrollHeight + "px";
           }
-    }, [TextAreaRef, value]);
+    }, [TextAreaRef, text]);
+
+    const onSubmit: SubmitHandler<FieldValues> = (data) => {
+        console.log(data)
+        setValue('message', '', { shouldValidate: true });
+        setText('');
+        axios.post('/api/messages', {
+            ...data,
+            conversationId
+        });
+    }
+
+    const onEnterPress = (e: React.KeyboardEvent) => {
+        if(e.key === "Enter" && e.shiftKey == false) {
+          e.preventDefault();
+          handleSubmit(onSubmit)();
+        }
+        else {
+            setValue('message', text, { shouldValidate: true });
+        }
+      }
 
     return (
         <div className="relative w-full flex items-center">
@@ -48,6 +71,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
                 placeholder={placeholder}
                 rows={1}
                 onChange={handleChange}
+                onKeyDown={onEnterPress}
                 required={required}
                 className="
                     text-black
