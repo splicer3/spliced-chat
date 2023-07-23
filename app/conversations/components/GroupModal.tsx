@@ -68,6 +68,8 @@ const GroupModal: React.FC<GroupModalProps> = ({
                                 text-base
                                 font-semibold
                                 leading-7
+                                md:mt-0
+                                mt-4
                                 text-gray-900
                                 dark:text-gray-100
                             "

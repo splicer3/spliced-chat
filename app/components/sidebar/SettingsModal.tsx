@@ -67,7 +67,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="space-y-12">
                     <div className="border-b border-gray-900/10 pb-12">
-                        <h2 className="text-base font-semibold leading-7 text-gray-900 dark:text-gray-100">
+                        <h2 className="text-base font-semibold leading-7 md:mt-0 mt-4 text-gray-900 dark:text-gray-100">
                             Profile 
                         </h2>
                         <p className="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-400">
